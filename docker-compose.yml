@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+
+  mssql:
+    build: ./docker/mssql
+    container_name: db
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Welcome@toSQL2022
+      - MSSQL_PID=Developer
+    volumes:
+      - ./docker/mssql/db-data:/var/opt/mssql/data
+    networks:
+      - supernet
+   
+  rstudio:
+    build: ./docker/rstudio
+    container_name: etl
+    ports:
+      - 8888:8888
+    networks:
+      - supernet
+networks:
+  supernet: {}
+
+  
